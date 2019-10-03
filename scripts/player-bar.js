@@ -28,6 +28,25 @@
         $('#time-control input').val(percent);
       }, 1000);
 
+      $('#volume-control input').on('input', function (event) {
+    player.setVolume(event.target.value);
+  })
+
+    setInterval( () => {
+      if (player.playState !== 'playing') { return; }
+      const currentTime = player.getTime();
+      const duration = player.getDuration();
+      const percent = (currentTime / duration) * 100;
+      $('#time-control .current-time').text( currentTime );
+      $('#time-control input').val(percent);
+  }, 1000);
+
+    setInterval( () => {
+      if(player.playstate !== 'playing') {return; }
+      const currentVolume = player.setVolume();
+      $('#volume-control input').val();
+    }, 1);
+
       $('button#previous').on('click', function() {
         if (player.playState !== 'playing') { return; }
 
